@@ -90,6 +90,7 @@ public class EditorListener implements IPartListener2{
 								e1.printStackTrace();
 							}
 							IMarker m = f.createMarker("my.marker");
+							m.setAttribute(IMarker.SOURCE_ID, "my.marker");
 							m.setAttribute(IMarker.LINE_NUMBER, patternResults[2]);
 							m.setAttribute(IMarker.MESSAGE, patternResults[0]);
 							m.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -128,10 +129,8 @@ public class EditorListener implements IPartListener2{
 						    Iterator<Annotation> ann =  iamf.getAnnotationIterator();
 						    while(ann.hasNext()) {
 						    	Annotation a = ann.next();
-						    	if(a.getType().equals("my.annotationType")) {
-						    		if(((SimpleMarkerAnnotation) a).getMarker().getType().equals("my.marker")) {
-						    			iamf.removeAnnotation(ann.next());
-						    		}
+						    	if(a.getText() == null) {
+						    		iamf.removeAnnotation(a);
 						    	}
 						    }
 						    iamf.addAnnotation(ma, new Position(offset, length));

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -16,7 +15,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
@@ -105,13 +103,8 @@ public class SampleHandler {
 	                    }
 						
 						try {					    
-							try {
-								f.deleteMarkers("my.marker", false, IResource.DEPTH_ZERO);
-							} catch (CoreException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
 							IMarker m = f.createMarker("my.marker");
+							m.setAttribute(IMarker.SOURCE_ID, "my.marker");
 							m.setAttribute(IMarker.LINE_NUMBER, patternResults[2]);
 							m.setAttribute(IMarker.MESSAGE, patternResults[0]);
 							m.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -119,7 +112,7 @@ public class SampleHandler {
 							m.setAttribute(IMarker.TEXT, patternResults[3]);
 							IAnnotationModel iamf = teditor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
 						    SimpleMarkerAnnotation ma = new SimpleMarkerAnnotation("my.annotationType", m);
-							    
+						    
 						    int offset = 0;
 						    int length= 0;
 						    try {
@@ -147,15 +140,6 @@ public class SampleHandler {
 						    
 						    iamf.connect(EditorListener.doc);
 						    
-						    Iterator<Annotation> ann =  iamf.getAnnotationIterator();
-						    while(ann.hasNext()) {
-						    	Annotation a = ann.next();
-						    	if(a.getType().equals("my.annotationType")) {
-						    		if(((SimpleMarkerAnnotation) a).getMarker().getType().equals("my.marker")) {
-						    			iamf.removeAnnotation(ann.next());
-						    		}
-						    	}
-						    }
 						    iamf.addAnnotation(ma, new Position(offset, length));
 						   
 						    iamf.disconnect(EditorListener.doc);
