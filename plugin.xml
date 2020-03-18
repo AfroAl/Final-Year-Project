@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.startup">
+   		<startup class="fyp_project.plugin.handlers.StartupHandler"/>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.ui.javaEditorTextHovers">
+      <hover
+            activate="true"
+            class="fyp_project.plugin.HoverText"
+            id="id.fyp_project.plugin.HoverText">
+      </hover>
+   </extension>
+   
+   <extension
+   		point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			markerType="my.marker"
+			class="fyp_project.plugin.quickfix.QuickFixer"/>
+	</extension>   	
+   <extension
+         id="my.marker"
+         name="Testing Marker"
+         point="org.eclipse.core.resources.markers">
+         <super type="org.eclipse.core.resources.textmarker"/>
+         <!--<persistent value="true"/>-->
+   </extension>
+   <extension
+   		 id="my.annotationType"
+   		 name="Testing Marker Annotation"
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerType="my.marker"
+            name="my.annotationType">
+      </type>
+   </extension>
+	<extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification"
+         id="my.annotationSpec">
+      <specification
+            annotationType="my.annotationType"
+            includeOnPreferencePage="true"
+            overviewRulerPreferenceKey="clruler"
+            label="Testing"
+			overviewRulerPreferenceValue="true"
+			highlightPreferenceKey="highlight.background"
+			highlightPreferenceValue="false"
+			colorPreferenceKey="clcolor"
+			colorPreferenceValue="252, 223, 3, 0.6"
+			textPreferenceKey="cltext"
+			textPreferenceValue="true"
+			presentationLayer="0"
+			verticalRulerPreferenceKey="clvertical"
+			verticalRulerPreferenceValue="true"
+			textStylePreferenceKey="clstyle"
+			textStylePreferenceValue="PROBLEM_UNDERLINE">
+      </specification>
+   </extension>
+ <extension
+       point="org.eclipse.ui.ide.markerResolution">
+ </extension>
+
+</plugin>
