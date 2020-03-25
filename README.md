@@ -63,19 +63,19 @@ The plugin can be installed several ways:
 This plugin will start automatically along with Eclipse. Each time an Editor Tab is changed, the plugin will run to detect any security vulnerabilities within the newly activated tab.
 
 If a vulnerability is detected the IDE will display it as such:
+
 ![Example of Security Vulnerability](/images/vulnerability.png "Example of Security Vulnerability")
-Format: ![Alt Text](url)
 
 The vulnerability will be made known to the user via a yellow squiggle underneath the vulnerable line. There will also be a yellow marker on the right-hand side of the Editor window.
 
 If you hover over the yellow marker, the type of vulnerability will be shown.
+
 ![Example of Marker](/images/marker.png "Example of Marker")
-Format: ![Alt Text](url)
 
 If you hover over the vulnerable line, you will receive some information on the type of vulnerability including Exploitability, Prevalence, Detectability, and Technial Impact.
+
 ![Example of Hover Text](/images/info.png "Example of Hover Text")
-Format: ![Alt Text](url)
 
 To fix a vulnerability, click on the vulnerable line and press Ctrl+1 to open the quick-fix menu. From here, a user can choose to fix the vulnerability. If they choose to fix it, a pop-up box will appear displaying the current vulnerable line, and what it will be changed to. Then a user can confirm or deny the change.
+
 ![Example of Refactor](/images/refactor.png "Example of Refactor")
-Format: ![Alt Text](url)
