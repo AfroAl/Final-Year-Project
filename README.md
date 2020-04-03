@@ -43,7 +43,7 @@ The plugin can be installed several ways:
     3. Click on the Add... button
     4. Give the repository a Name, and enter "ftp://35.246.68.175" as the Location. (Excluding the double quotes)
     5. Click the Add button.
-    6. Activate the check mark next to the Uncategorized item.
+    6. Activate the check mark next to the FYP Project item.
     7. Click Next in the bottom-right of the window.
     8. Click Next again in the bottom-right of the window.
     9. Toggle the "I accept the terms of the license agreement" radio button.

@@ -1,6 +1,5 @@
 /* LDAP Injection
-String filter = "(&(uid={0})(userPassword={1}))";
-NamingEnumeration<SearchResult> results = ctx.search("ou=system", filter, new String[]{user, pass}, new SearchControls());
-
+String filter = "(&(uid=" + user + ")(userPassword=" + pass + "))";
+NamingEnumeration<SearchResult> results = ctx.search("ou=system", filter, new SearchControls());
 return results.hasMore();
  */

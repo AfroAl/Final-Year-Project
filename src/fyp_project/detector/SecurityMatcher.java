@@ -28,10 +28,10 @@ public class SecurityMatcher
     							"<html><body><p><b><u>LDAP - Unsafe Search</u></b></p> <br> <p><b>Exploitability: 3\u00A0\u00A0\u00A0\u00A0Prevalence: 2\u00A0\u00A0\u00A0\u00A0Detectability: 3\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>LDAP Injection is an attack used to exploit web based applications that construct LDAP statements based on user input. When an application fails to properly sanitize user input, it's possible to modify LDAP statements through techniques similar to SQL Injection. LDAP injection attacks could result in the granting of permissions to unauthorized queries, and content modification inside the LDAP tree.</p></body></html>",
     							"<html><body><p><b><u>RegEx - ReDOS Prevention</u></b></p> <br> <p><b>Exploitability: 3\u00A0\u00A0\u00A0\u00A0Prevalence: 2\u00A0\u00A0\u00A0\u00A0Detectability: 3\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>The Regular expression Denial of Service (ReDoS) is a Denial of Service attack, that exploits the fact that most Regular Expression implementations may reach extreme situations that cause them to work very slowly (exponentially related to input size). An attacker can then cause a program using a Regular Expression to enter these extreme situations and then hang for a very long time.</p> <br> <p>The Regular Expression naïve algorithm builds a Nondeterministic Finite Automaton (NFA), which is a finite state machine where for each pair of state and input symbol there may be several possible next states. Then the engine starts to make transition until the end of the input. Since there may be several possible next states, a deterministic algorithm is used. This algorithm tries one by one all the possible paths (if needed) until a match is found (or all the paths are tried and fail).</p> <p>For the input aaaaX there are 16 possible paths in the above graph. But for aaaaaaaaaaaaaaaaX there are 65536 possible paths, and the number is double for each additional a. This is an extreme case where the naïve algorithm is problematic, because it must pass on many many paths, and then fail.</p></body></html>",
     							"<html><body><p><b><u>XSS - Input Validation</u></b></p> <br> <p><b>Exploitability: 3\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 3\u00A0\u00A0\u00A0\u00A0Technical: 2</b></p> <br> <p>Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a browser side script, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.</p> <br> <p>An attacker can use XSS to send a malicious script to an unsuspecting user. The end user’s browser has no way to know that the script should not be trusted, and will execute the script. Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by the browser and used with that site. These scripts can even rewrite the content of the HTML page.</p></body></html>",
-    							"<html><body><p><b><u>Sensitive Data Exposure - Insecure Cryptography</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>TODO</p></body></html>",
-    							"<html><body><p><b><u>Sensitive Data Exposure - Main Method in Web App</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>TODO</p></body></html>",
-    							"<html><body><p><b><u>Sensitive Data Exposure - Base64 Encoding</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>TODO</p></body></html>",
-    							"<html><body><p><b><u>Sensitive Data Exposure - Insecure PRNG</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>TODO</p></body></html>" }; 
+    							"<html><body><p><b><u>Sensitive Data Exposure - Insecure Cryptography</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>Cryptography is the practice of securing communications that can be open to third-party attackers. This can be done using encryption algorithms. However, some algorithms can be theoretically sound but not have a strong enough level of protection to defend against attacks such as a Brute Force Attack. The solution to this is to use an encryption scheme that is considered strong enough by security professionals. E.G. Use AES-128 instead of AES-64.</p></body></html>",
+    							"<html><body><p><b><u>Sensitive Data Exposure - Main Method in Web App</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>When developing a web application, a developer may include a main method within the application for debug purposes. If these main methods are left in, it can leave some vulnerabilites open to the public. An attacker may get access to this method and thus access to the code within it. This can release information about how other parts of the application interaact with the servlet or how other servlets work entirely. So while having a main method in a web application is not a direct vulnmerability itself, it can indicate to an attacker that other vulnerabilites may be present.</p></body></html>",
+    							"<html><body><p><b><u>Sensitive Data Exposure - Base64 Encoding</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>Base64 Encoding is not an inherently insecure encoding but developers can sometimes confuse it for an encryption method. Encoding does not mean encryption. An encoding is a system that converts a set of data from one form to another. This means that data encoded by Base64 can be easily changed back to its original form using a Base64 decoder. For this reason, valuable data being sent using Base64 encoding should be sent using a secure encryption scheme instead.</p></body></html>",
+    							"<html><body><p><b><u>Sensitive Data Exposure - Insecure PRNG</u></b></p> <br> <p><b>Exploitability: 2\u00A0\u00A0\u00A0\u00A0Prevalence: 3\u00A0\u00A0\u00A0\u00A0Detectability: 2\u00A0\u00A0\u00A0\u00A0Technical: 3</b></p> <br> <p>Sensitive Data Exposure occurs when an application does not adequately protect sensitive information. The data can vary and anything from passwords, session tokens, credit card data to private health data and more can be exposed.</p> <br> <p>While computers are very powerful, they can never generate a truly random number. Instead they generate a pseudorandom number based on a given seed (usually the computer's time). However, this means that if an application uses a random number, it could be guessed what the next \"random\" number will be. To prevent this, using a secure method of generating pseudorandom numbers should be used such as SecureRandom.class in Java.</p></body></html>" }; 
     
     private String getReDOSValues = "[+*{]";
     private Pattern getReDOSValuesPattern = Pattern.compile(getReDOSValues);
@@ -39,14 +39,15 @@ public class SecurityMatcher
     private String getObjectName = "(\\w+\\s*=\\s*\")";
     private Pattern getObjectNamePattern = Pattern.compile(getObjectName);
 
-    private boolean skipPattern;
     private boolean matchFound = false;
     private boolean isServlet = false;
     private String objectName;
+    private ArrayList<String> lines;
 
-    public SecurityMatcher(boolean b) {
-        skipPattern = b;
-
+    public SecurityMatcher(ArrayList<String> lines) {
+    	
+    	this.lines = lines;
+    	
         //SQL Injection
         patterns.put(0, PrepareStatementPattern.getPattern());
         patterns.put(1, ExecuteQueryPattern.getPattern());
@@ -69,7 +70,7 @@ public class SecurityMatcher
     }
 
     //Match a line with a given pattern number
-    public String[] patternMatch(ArrayList<String> lines, int patternNumber, int patternValue) {
+    public String[] patternMatch(String line, int i, int patternNumber, int patternValue) {
         String[] results = new String[4];
         boolean skip = false;
         int count=0;
@@ -87,8 +88,8 @@ public class SecurityMatcher
         }
 
         // Go through each line looking for a match
-        for(int i=0; i<lines.size(); i++) {
-            String line = lines.get(i);
+//        for(int i=0; i<lines.size(); i++) {
+//            String line = lines.get(i);
 
             if(patternNumber == 7) {
                 if(line.contains("class") && line.contains("extends HttpServlet")) {
@@ -108,6 +109,7 @@ public class SecurityMatcher
                     while(redos.find()) { count++; }
 
                     setObjectName(line);
+                    System.out.println("YOYO " + objectName);
                     for(String l : lines) {
                         if(!l.contains(".compile(" + objectName + ")") || !l.contains(".matches(" + objectName + ")") || !l.contains(".replace(" + objectName + ")") || !l.contains(".replaceAll(" + objectName + ")") || !l.contains(".replaceFirst(" + objectName + ")")) {
                             skip = true;
@@ -119,26 +121,24 @@ public class SecurityMatcher
 
                 }
 
-                if(patternNumber == 7) {
+                if(patternNumber == 7 && isServlet) {
                     boolean inRightClass = false;
                     for(String l : lines) {
-                        if(l.contains("class") && l.contains(m.group())) {
+                        if(l.equals(line)) {
                             inRightClass = true;
-                        } else if(l.contains("class") && !l.contains(m.group())) {
+                        } else if(l.contains("class") && !l.equals(line)) {
                             inRightClass = false;
                         }
 
                         if(inRightClass) {
                             if(l.contains("main(")) {
+                            	skip = false;
                                 break;
+                            } else {
+                            	skip = true;
                             }
                         }
                     }
-                }
-
-                if(skip) {
-                    skip = false;
-                    continue;
                 }
 
                 // Make sure any already changed lines aren't counted again
@@ -148,9 +148,9 @@ public class SecurityMatcher
                     skip = true;
                 } else if( patternNumber == 4 && count < 2) {
                     skip = true;
-                } else if( patternNumber == 4 && !line.equals(lines.get(lines.size()-1)) && lines.get(i+1).contains("N.B.")) {
-                    skip = true;
-                } else if(patternNumber == 5 && line.contains("// Checked")) {
+                //} //else if( patternNumber == 4 && !line.equals(lines.get(lines.size()-1)) && lines.get(i+1).contains("N.B.")) {
+                    //skip = true;
+                } else if(patternNumber == 5 && line.contains("//Potentially vulnerable.")) {
                     skip = true;
                 } else if(patternNumber == 6 && line.contains("// Safe"))  {
                     skip = true;
@@ -165,20 +165,23 @@ public class SecurityMatcher
                 // Skip any unwanted lines
                 if(skip) {
                     skip = false;
-                    continue;
+                    return results;
                 }
 
+                //System.out.println("***** " + keys[patternNumber] + " *****");
+                //System.out.print("Found value at line " + (i + 1) + ":\r\n" + line);
                 results[0] = keys[patternNumber];
                 results[1] = line;
                 results[2] = String.valueOf(i+1);
                 results[3] = desc[patternNumber];
                 matchFound = true;
-                break;
+                
             }
-        }
+        //}
 
         // No match found
-        if(!matchFound && !skipPattern) {
+        if(!matchFound) {
+            //System.out.println("***** " + keys[patternNumber] + " ***** .......... No match found in this file!");
         }
 
         return results;
