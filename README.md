@@ -50,13 +50,6 @@ The plugin can be installed several ways:
     10. Click the Finish button.
     11. Click "Install anyway" in the Security Warning pop-up box.
     12. Restart Eclipse when prompted to.
-    
-4. Eclipse Marketplace
-    1. Start Eclipse.
-    2. Click on Help -> Eclsipe Marketplace
-    3. Search for "16355706" in the Search Bar.
-    4. Click on the Install button next to the plugin.
-    5. Follow the preceding instructions in Eclipse.
 
 # How to Use
 
