@@ -65,6 +65,9 @@ public class StartupHandler implements IStartup{
 	}
 	
 	static void firstRun() {
+		if(!(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() instanceof ITextEditor)) {
+			return;
+		}
 		int numberOfPatterns = 10;
 		ArrayList<String> lines = new ArrayList<>();
 		String[] patternResults;
@@ -75,7 +78,6 @@ public class StartupHandler implements IStartup{
 		EditorListener.doc = teditor.getDocumentProvider().getDocument(input);
 		
 		for(IFile f : files) {
-			//if(f.getRawLocation().toOSString().contains("Test")) {
 			if(f.getFullPath().equals(((FileEditorInput)teditor.getEditorInput()).getFile().getFullPath())) {
 				for(int i=0; i<numberOfPatterns; i++) {
 					try {
@@ -93,19 +95,13 @@ public class StartupHandler implements IStartup{
 					
 					int lineNumber = 0;
 					for(String l : lines) {
-						System.out.println("DEBUG: " + i);
-						System.out.println(l);
 						SecurityMatcher securityMatcher = new SecurityMatcher(lines);
 						patternResults = securityMatcher.patternMatch(l, lineNumber, i, 6);
 						lineNumber++;
 						
 						// Skip this pattern
 	                    if ((patternResults[0] == null) || (patternResults[1] == null)) {
-	                        //skip = false;
 	                        continue;
-	                    } else {
-	                        //i--; // Check the file again for other matches
-	                        //skip = true;
 	                    }
 						
 						try {					    
@@ -163,6 +159,8 @@ public class StartupHandler implements IStartup{
 						} catch (CoreException e) {
 						}
 					}
+					
+					lines.clear();
 				}
 			}
 		}

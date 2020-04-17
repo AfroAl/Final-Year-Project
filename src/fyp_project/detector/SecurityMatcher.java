@@ -38,8 +38,10 @@ public class SecurityMatcher
 
     private String getObjectName = "(\\w+\\s*=\\s*\")";
     private Pattern getObjectNamePattern = Pattern.compile(getObjectName);
+    
+    private String getVariables = "(\"\\s*\\\\+\\s*\\w+\\s*\\\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+\\s*\\\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+)";
+    private Pattern getVariablesPattern = Pattern.compile(getVariables);
 
-    private boolean matchFound = false;
     private boolean isServlet = false;
     private String objectName;
     private ArrayList<String> lines;
@@ -87,101 +89,89 @@ public class SecurityMatcher
             return results;
         }
 
-        // Go through each line looking for a match
-//        for(int i=0; i<lines.size(); i++) {
-//            String line = lines.get(i);
-
-            if(patternNumber == 7) {
-                if(line.contains("class") && line.contains("extends HttpServlet")) {
-                    isServlet = true;
-                } else if(line.contains("class") && !line.contains("extends HttpServlet")) {
-                    isServlet = false;
-                }
+        if(patternNumber == 7) {
+            if(line.contains("class") && line.contains("extends HttpServlet")) {
+                isServlet = true;
+            } else if(line.contains("class") && !line.contains("extends HttpServlet")) {
+                isServlet = false;
             }
+        }
 
-
-            Matcher m = patterns.get(patternNumber).matcher(line);
-            if(m.find()) {
-
-                // Checking for the number of harmful regex symbols
-                if(patternNumber == 4) {
-                    Matcher redos = getReDOSValuesPattern.matcher(m.group());
-                    while(redos.find()) { count++; }
-
-                    setObjectName(line);
-                    System.out.println("YOYO " + objectName);
-                    for(String l : lines) {
-                        if(!l.contains(".compile(" + objectName + ")") || !l.contains(".matches(" + objectName + ")") || !l.contains(".replace(" + objectName + ")") || !l.contains(".replaceAll(" + objectName + ")") || !l.contains(".replaceFirst(" + objectName + ")")) {
-                            skip = true;
-                        } else {
-                            skip = false;
-                            break;
-                        }
-                    }
-
-                }
-
-                if(patternNumber == 7 && isServlet) {
-                    boolean inRightClass = false;
-                    for(String l : lines) {
-                        if(l.equals(line)) {
-                            inRightClass = true;
-                        } else if(l.contains("class") && !l.equals(line)) {
-                            inRightClass = false;
-                        }
-
-                        if(inRightClass) {
-                            if(l.contains("main(")) {
-                            	skip = false;
-                                break;
-                            } else {
-                            	skip = true;
-                            }
-                        }
-                    }
-                }
-
-                // Make sure any already changed lines aren't counted again
-                if(patternNumber == 2 && line.contains("?")) {
-                    skip = true;
-                } else if(patternNumber == 3 && line.contains("Sanitised")) {
-                    skip = true;
-                } else if( patternNumber == 4 && count < 2) {
-                    skip = true;
-                //} //else if( patternNumber == 4 && !line.equals(lines.get(lines.size()-1)) && lines.get(i+1).contains("N.B.")) {
-                    //skip = true;
-                } else if(patternNumber == 5 && line.contains("//Potentially vulnerable.")) {
-                    skip = true;
-                } else if(patternNumber == 6 && line.contains("// Safe"))  {
-                    skip = true;
-                } else if(patternNumber == 7 && !isServlet) {
-                    skip = true;
-                } else if(patternNumber == 7 && line.contains("// Unsafe")) {
-                    skip = true;
-                } else if(patternNumber == 8 && line.contains("// Unsafe")) {
-                    skip = true;
-                }
-
-                // Skip any unwanted lines
-                if(skip) {
-                    skip = false;
-                    return results;
-                }
-
-                //System.out.println("***** " + keys[patternNumber] + " *****");
-                //System.out.print("Found value at line " + (i + 1) + ":\r\n" + line);
-                results[0] = keys[patternNumber];
-                results[1] = line;
-                results[2] = String.valueOf(i+1);
-                results[3] = desc[patternNumber];
-                matchFound = true;
+        Matcher m = patterns.get(patternNumber).matcher(line);
+        if(m.find()) {
+             // Checking for the number of harmful regex symbols
+            if(patternNumber == 4) {
+                Matcher redos = getReDOSValuesPattern.matcher(m.group());
+                while(redos.find()) { count++; }
+                setObjectName(line);
                 
+                for(String l : lines) {
+                	if(!l.contains(".compile(" + objectName + ")") && !l.contains(".matches(" + objectName + ")") && !l.contains(".replace(" + objectName + ")") && !l.contains(".replaceAll(" + objectName + ")") && !l.contains(".replaceFirst(" + objectName + ")")) {
+                        skip = true;
+                    } else {
+                        skip = false;
+                        break;
+                    }
+                }
             }
-        //}
+            
+            // Checking if SQL String has variables within it
+            if(patternNumber == 0 || patternNumber == 1 || patternNumber == 2) {
+            	Matcher vars = getVariablesPattern.matcher(line);
+            	if(!vars.find()) {
+            		skip = true;
+            	}
+            }
+            
+            if(patternNumber == 7 && isServlet) {
+            	boolean inRightClass = false;
+                for(String l : lines) {
+                    if(l.equals(line)) {
+                        inRightClass = true;
+                    } else if(l.contains("class") && !l.equals(line)) {
+                        inRightClass = false;
+                    }
 
-        // No match found
-        if(!matchFound) {
-            //System.out.println("***** " + keys[patternNumber] + " ***** .......... No match found in this file!");
+                    if(inRightClass) {
+                        if(l.contains("main(")) {
+                        	skip = false;
+                            break;
+                        } else {
+                          	skip = true;
+                        }
+                    }
+                }
+            }
+
+            // Make sure any already changed lines aren't counted again
+            if(patternNumber == 2 && line.contains("?")) {
+                skip = true;
+            } else if(patternNumber == 3 && line.contains("Sanitised")) {
+                skip = true;
+            } else if( patternNumber == 4 && (count < 2 || line.contains("// Checked"))) {
+                skip = true;
+            } else if(patternNumber == 5 && line.contains("// Checked")) {
+                skip = true;
+            } else if(patternNumber == 6 && line.contains("// Safe"))  {
+                skip = true;
+            } else if(patternNumber == 7 && !isServlet) {
+                skip = true;
+            } else if(patternNumber == 7 && line.contains("// Unsafe")) {
+                skip = true;
+            } else if(patternNumber == 8 && line.contains("// Unsafe")) {
+                skip = true;
+            }
+            
+            // Skip any unwanted lines
+            if(skip) {
+                skip = false;
+                return results;
+            }
+
+            results[0] = keys[patternNumber];
+            results[1] = line;
+            results[2] = String.valueOf(i+1);
+            results[3] = desc[patternNumber];                
         }
 
         return results;

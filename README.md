@@ -1,9 +1,9 @@
 # A Tool for Automated Security Refactoring
 **Student Name:** Andrew Lambert\
 **Student Number:** 16355706
+**Supervisor** Liliana Pasquale
 ## 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
-
+TODO PROJECT DESCRIPTION, CODE EXPLANATION
 
 # Project Structure
 This repository is structured as such:
@@ -17,7 +17,7 @@ This repository is structured as such:
  2. bin/fyp_project ----> Java classes
  
  3. Test Cases ----> Web applications to test against
- 4. Examples ----> Examples of each vulnerability, what can be detected, and how it is vulnerability.
+ 4. Examples ----> Examples of each vulnerability, what can be detected, and how it is vulnerable.
 
 # How to Install
 

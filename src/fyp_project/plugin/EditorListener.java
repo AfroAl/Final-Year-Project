@@ -36,7 +36,6 @@ public class EditorListener implements IPartListener2{
 
 	@Override
 	public void partActivated(IWorkbenchPartReference arg0) {
-		
 		if(!(arg0.getPage().getActiveEditor() instanceof ITextEditor)) {
 			return;
 		}
@@ -49,99 +48,91 @@ public class EditorListener implements IPartListener2{
 		IEditorInput input = teditor.getEditorInput();
 		doc = teditor.getDocumentProvider().getDocument(input);
 		
-		for(IFile f : files) {
-			//if(f.getRawLocation().toOSString().contains("Test")) {
-				
-				if(f.getFullPath().equals(((FileEditorInput)teditor.getEditorInput()).getFile().getFullPath())) {
-					for(int i=0; i<numberOfPatterns; i++) {
-						try {
-							BufferedReader reader = new BufferedReader(new InputStreamReader(f.getContents(true), f.getCharset()));
-							String line = reader.readLine();
-							while(line != null) {
-								lines.add(line);
-								line = reader.readLine();
-							}
-						} catch (UnsupportedEncodingException | CoreException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
+		for(IFile f : files) {				
+			if(f.getFullPath().equals(((FileEditorInput)teditor.getEditorInput()).getFile().getFullPath())) {
+				for(int i=0; i<numberOfPatterns; i++) {
+					try {
+						BufferedReader reader = new BufferedReader(new InputStreamReader(f.getContents(true), f.getCharset()));
+						String line = reader.readLine();
+						while(line != null) {
+							lines.add(line);
+							line = reader.readLine();
 						}
-						
-						int lineNumber = 0;
-						for(String l : lines) {
-							System.out.println("DEBUG: " + i);
-							System.out.println(l);
-							SecurityMatcher securityMatcher = new SecurityMatcher(lines);
-							patternResults = securityMatcher.patternMatch(l, lineNumber, i, 6);
-							lineNumber++;
-							
-							// Skip this pattern
-		                    if ((patternResults[0] == null) || (patternResults[1] == null)) {
-		                        //skip = false;
-		                        continue;
-		                    } else {
-		                        //i--; // Check the file again for other matches
-		                        //skip = true;
-		                    }
-							
-							try {					    
-								
-								IMarker m = f.createMarker("my.marker");
-								m.setAttribute(IMarker.SOURCE_ID, "my.marker");
-								m.setAttribute(IMarker.LINE_NUMBER, patternResults[2]);
-								m.setAttribute(IMarker.MESSAGE, patternResults[0]);
-								m.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-								m.setAttribute(IMarker.LOCATION, f.getRawLocation().toOSString());
-								m.setAttribute(IMarker.TEXT, patternResults[3]);
-								IAnnotationModel iamf = teditor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
-							    SimpleMarkerAnnotation ma = new SimpleMarkerAnnotation("my.annotationType", m);
-								    
-							    int offset = 0;
-							    int length= 0;
-							    try {
-									offset = EditorListener.doc.getLineInformation(Integer.parseInt(patternResults[2])-1).getOffset();
-									length = EditorListener.doc.getLineInformation(Integer.parseInt(patternResults[2])-1).getLength();
-								} catch (BadLocationException e) {
-									e.printStackTrace();
-								}
-							    
-							    try {
-									while(EditorListener.doc.getChar(offset) == ' ') {
-										offset++;
-										length--;
-									}
-									
-									while(EditorListener.doc.getChar(offset) == '\t') {
-										offset++;
-										length--;
-									}
-								} catch (BadLocationException e) {
-									e.printStackTrace();
-								}
-							    
-							    iamf.connect(EditorListener.doc);
-							    boolean exists = false;
-							    Iterator<Annotation> ann =  iamf.getAnnotationIterator();
-							    while(ann.hasNext()) {
-							    	Annotation a = ann.next();
-							    	if(iamf.getPosition(a) == new Position(offset, length) && a.getType().equals("my.annotationType")) {
-							    		exists = true;
-							    		break;
-							    	}
-							    }
-							    
-							    if(!exists) {
-							    	iamf.addAnnotation(ma, new Position(offset, length));
-							    }
-							   
-							    iamf.disconnect(EditorListener.doc);
-									
-							} catch (CoreException e) {
-							}
-						}
+					} catch (UnsupportedEncodingException | CoreException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
+						
+					int lineNumber = 0;
+					for(String l : lines) {
+						SecurityMatcher securityMatcher = new SecurityMatcher(lines);
+						patternResults = securityMatcher.patternMatch(l, lineNumber, i, 6);
+						lineNumber++;
+						
+						// Skip this pattern
+		                if ((patternResults[0] == null) || (patternResults[1] == null)) {
+		                	continue;
+		                }
+							
+		                System.out.println("FUCK: " + patternResults[0]);
+						try {	
+							IMarker m = f.createMarker("my.marker");
+							m.setAttribute(IMarker.SOURCE_ID, "my.marker");
+							m.setAttribute(IMarker.LINE_NUMBER, patternResults[2]);
+							m.setAttribute(IMarker.MESSAGE, patternResults[0]);
+							m.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+							m.setAttribute(IMarker.LOCATION, f.getRawLocation().toOSString());
+							m.setAttribute(IMarker.TEXT, patternResults[3]);
+							IAnnotationModel iamf = teditor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
+							SimpleMarkerAnnotation ma = new SimpleMarkerAnnotation("my.annotationType", m);
+								    
+							int offset = 0;
+							int length= 0;
+							try {
+								offset = EditorListener.doc.getLineInformation(Integer.parseInt(patternResults[2])-1).getOffset();
+								length = EditorListener.doc.getLineInformation(Integer.parseInt(patternResults[2])-1).getLength();
+							} catch (BadLocationException e) {
+								e.printStackTrace();
+							}
+							    
+							try {
+								while(EditorListener.doc.getChar(offset) == ' ') {
+									offset++;
+									length--;
+								}
+									
+								while(EditorListener.doc.getChar(offset) == '\t') {
+									offset++;
+									length--;
+								}
+							} catch (BadLocationException e) {
+								e.printStackTrace();
+							}
+							    
+							iamf.connect(EditorListener.doc);
+							boolean exists = false;
+							Iterator<Annotation> ann =  iamf.getAnnotationIterator();
+							while(ann.hasNext()) {
+							  	Annotation a = ann.next();
+							   	if(iamf.getPosition(a) == new Position(offset, length) && a.getType().equals("my.annotationType")) {
+							   		exists = true;
+							   		break;
+							   	}
+							}
+							    
+							if(!exists) {
+							   	iamf.addAnnotation(ma, new Position(offset, length));
+							}
+							  
+							iamf.disconnect(EditorListener.doc);
+								
+						} catch (CoreException e) {}
+					}
+					
+					lines.clear();
 				}
-			//}
+			}
 		}
 	}
 

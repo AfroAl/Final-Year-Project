@@ -132,7 +132,7 @@ public class ExecuteQueryRefactor {
             setStrings.append(spaces).append(newObjectName).append(".setString(").append(variableNames.size()).append(", ").append(variableNames.get(variableNames.size() - 1)).append(");");
 
 
-            replacement = sqlStringFinal + prepareStatement + "\r\n" + setStrings + "\r\n" + resultSet;
+            replacement = sqlStringFinal + prepareStatement + "\r\n" + setStrings + "\r\n" + resultSet + "\r\n" + newObjectName + ".close()";
 
             deletion = objectName;
             return replacement;
