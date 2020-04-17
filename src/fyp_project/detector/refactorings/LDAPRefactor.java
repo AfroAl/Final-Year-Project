@@ -18,10 +18,10 @@ public class LDAPRefactor {
     private String getObjectName = "(\\w+\\s*=\\s*\\w+\\.)";
     private Pattern getObjectNamePattern = Pattern.compile(getObjectName);
 
-    private String getVariables = "(\"\\s*\\+\\s*\\w+\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+)";
+    private String getVariables = "('\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w(\\.\\w+\\(\\))*)|('\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+(.\\w+)*)|('\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+)";
     private Pattern getVariablesPattern = Pattern.compile(getVariables);
 
-    private String getVariableNames = "([\\w]+)";
+    private String getVariableNames = "(\\w+((\\.\\w+\\(\\))|(\\.\\w+))*)";
     private Pattern getVariableNamesPattern = Pattern.compile(getVariableNames);
 
     private String getSpaces = "^\\s*//\\s*|^\\s*";

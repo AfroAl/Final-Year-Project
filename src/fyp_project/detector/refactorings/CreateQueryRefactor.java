@@ -21,10 +21,10 @@ public class CreateQueryRefactor {
     private String getBracketedString = "\\([\\s\\S]+?\\)";
     private Pattern getBracketedStringPattern = Pattern.compile(getBracketedString);
 
-    private String getVariables = "(\"\\s*\\+\\s*\\w+\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+)";
+    private String getVariables = "('\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+(\\.\\w+\\(\\))*\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w(\\.\\w+\\(\\))*)|('\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+(.\\w+)*\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+(.\\w+)*)|('\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"')|(\"\\s*\\+\\s*\\w+\\s*\\+\\s*\")|(\"'\"\\s*\\+\\s*\\w+\\s*\\+\\s*\"'\")|(\"\\s*\\+\\s*\\w+)";
     private Pattern getVariablesPattern = Pattern.compile(getVariables);
 
-    private String getVariableNames = "([\\w]+)";
+    private String getVariableNames = "(\\w+((\\.\\w+\\(\\))|(\\.\\w+))*)";
     private Pattern getVariableNamesPattern = Pattern.compile(getVariableNames);
 
     private String getSpaces = "^\\s*//\\s*|^\\s*";

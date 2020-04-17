@@ -68,7 +68,7 @@ public class StartupHandler implements IStartup{
 		if(!(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() instanceof ITextEditor)) {
 			return;
 		}
-		int numberOfPatterns = 10;
+		int numberOfPatterns = 11;
 		ArrayList<String> lines = new ArrayList<>();
 		String[] patternResults;
 		

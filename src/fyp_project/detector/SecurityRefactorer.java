@@ -2,16 +2,7 @@ package fyp_project.detector;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fyp_project.detector.refactorings.Base64EncoderRefactor;
-import fyp_project.detector.refactorings.CreateQueryRefactor;
-import fyp_project.detector.refactorings.CryptoKeysRefactor;
-import fyp_project.detector.refactorings.ExecuteQueryRefactor;
-import fyp_project.detector.refactorings.InsecureRNGRefactor;
-import fyp_project.detector.refactorings.LDAPRefactor;
-import fyp_project.detector.refactorings.PrepareStatementRefactor;
-import fyp_project.detector.refactorings.RegExRefactor;
-import fyp_project.detector.refactorings.WebServerMainRefactor;
-import fyp_project.detector.refactorings.XSSRefactor;
+import fyp_project.detector.refactorings.*;
 
 public class SecurityRefactorer {
 
@@ -42,6 +33,12 @@ public class SecurityRefactorer {
                 ExecuteQueryRefactor executeQueryRefactor = new ExecuteQueryRefactor(value, lines);
                 replacement = executeQueryRefactor.refactor();
                 deletions.put(key, executeQueryRefactor.getDeletion());
+                break;
+                
+            case("SQL Injection - parameterisedString"):
+                ParameterisedStringRefactor parameterisedStringRefactor = new ParameterisedStringRefactor(value, lines);
+                replacement = parameterisedStringRefactor.refactor();
+                deletions.put(key, parameterisedStringRefactor.getDeletion());
                 break;
 
             case("XSS - Input Validation"):

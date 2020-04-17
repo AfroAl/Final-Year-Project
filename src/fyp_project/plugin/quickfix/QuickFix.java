@@ -141,6 +141,7 @@ public class QuickFix implements IMarkerResolution{
                     if(!deletions.get(key).equals("")) {
                         if(lines.get(j).contains(deletions.get(key))) {
                             lines.remove(j);
+                            j--;
                         }
                     }
                 }

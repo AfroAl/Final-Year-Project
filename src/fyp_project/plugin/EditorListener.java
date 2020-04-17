@@ -39,7 +39,7 @@ public class EditorListener implements IPartListener2{
 		if(!(arg0.getPage().getActiveEditor() instanceof ITextEditor)) {
 			return;
 		}
-		int numberOfPatterns = 10;
+		int numberOfPatterns = 11;
 		ArrayList<String> lines = new ArrayList<>();
 		String[] patternResults;
 		
