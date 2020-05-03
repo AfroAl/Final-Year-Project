@@ -3,7 +3,7 @@
 **Student Number:** 16355706
 **Supervisor** Liliana Pasquale
 ## 
-TODO PROJECT DESCRIPTION, CODE EXPLANATION
+Security is vital to any individual and organisation that develop and use software. Security aims to protect valuable digital and physical assets from intentional harm caused by cyber (and also cyber-physical) attacks. Despite its importance, security is often considered as an “afterthought” and it is only addressed at the last stages of the software development process (e.g., during penetration testing) or after deployment. In this report, I present an approach to allow software security to be integrated early in the development lifecycle. The main objective is to allow software developers to detect security vulnerabilities during software development. Through the creation of a plugin for a developer’s Integrated Development Environment (IDE), software developers will be able to enable static analysis of source code to identify types and locations of security vulnerabilities. Developers will also receive suggestions about how to fix vulnerabilities through secure refactorings, where the vulnerability will be quashed but keeping the behaviour of the software the same. Developers will also be given the option to apply security refactorings automatically. The proposed plugin is applied to web applications and uses vulnerabilities described in the OWASP Top 10. To evaluate this approach, existing web applications having known security vulnerabilities will be adopted. The evaluation will assess precision and recall of the approach proposed to identify vulnerabilities and effectiveness of the suggested security refactorings.
 
 # Project Structure
 This repository is structured as such:
@@ -15,9 +15,7 @@ This repository is structured as such:
 	2. plugin ----> Files for the plugin integration
 		1. quickfix ----> Files to implement Quick Fixes to the vulnerabilities
  2. bin/fyp_project ----> Java classes
- 
- 3. Test Cases ----> Web applications to test against
- 4. Examples ----> Examples of each vulnerability, what can be detected, and how it is vulnerable.
+ 3. Examples ----> Examples of each vulnerability, what can be detected, and how it is vulnerable.
 
 # How to Install
 

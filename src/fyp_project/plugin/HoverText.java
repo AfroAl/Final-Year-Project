@@ -29,10 +29,7 @@ public class HoverText implements IJavaEditorTextHover
 		    		SimpleMarkerAnnotation sma = (SimpleMarkerAnnotation) a;
 		    		if(sma.getMarker().getType().equals("my.marker") ) {
 						Position p = iamf.getPosition(sma);
-						System.out.println(region.getOffset() + "<= " + (p.getOffset() + p.getLength()));
-						System.out.println(region.getOffset() + " >= " + p.getOffset());
 						if(region.getOffset() >= p.getOffset() && region.getOffset() <= (p.getOffset() + p.getLength())) {
-							System.out.println("YAY");
 							return (String) sma.getMarker().getAttribute(IMarker.TEXT);
 						}
 		    		}

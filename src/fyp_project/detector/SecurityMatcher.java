@@ -36,6 +36,9 @@ public class SecurityMatcher
     
     private String getStringName = "(?!String)(\\w+)(?=\\s*=\\s*)";
     private Pattern getStringNamePattern = Pattern.compile(getStringName);
+    
+    private String getNonStringXSString = "Integer\\.((valueOf\\(\\s*<STRING>)|(parseInt\\(\\s*<STRING>))|LocalDate\\.parse\\(\\s*<STRING>|boolean.+<STRING>";
+    private Pattern getNonStringXSSPattern;
 
     private boolean isServlet = false;
     private String objectName;
@@ -146,17 +149,25 @@ public class SecurityMatcher
                 if(stringNameM.find()) {
                     stringName = stringNameM.group();
 
+                    getNonStringXSString = getNonStringXSString.replace("<STRING>", stringName);
+                    getNonStringXSSPattern = Pattern.compile(getNonStringXSString);
+                    
+                    
                     for(String l : lines) {
-                        if(l.contains("Integer.parseInt("+stringName+")") || l.contains("Integer.valueOf("+stringName+")") || l.contains("LocalDate.parse(" + stringName)) {
-                            skip = true;
-                            break;
-                        }
+                    	Matcher nonXSSM = getNonStringXSSPattern.matcher(l);
+                    	if(nonXSSM.find()) {
+                    		System.out.println(l);
+                    		skip = true;
+                    		break;
+                    	}
                     }
                 }
             }
+            
+            
 
             // Make sure any already changed lines aren't counted again
-            if(patternNumber == 2 && line.contains("?")) {
+            if(patternNumber < 4 && line.contains("?")) {
                 skip = true;
             } else if(patternNumber == 4 && line.contains("Sanitised")) {
                 skip = true;

@@ -75,7 +75,6 @@ public class EditorListener implements IPartListener2{
 		                	continue;
 		                }
 							
-		                System.out.println("FUCK: " + patternResults[0]);
 						try {	
 							IMarker m = f.createMarker("my.marker");
 							m.setAttribute(IMarker.SOURCE_ID, "my.marker");
